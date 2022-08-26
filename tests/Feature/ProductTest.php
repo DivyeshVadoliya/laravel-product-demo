@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,8 @@ class ProductTest extends TestCase
 
     public function test_new_product_store()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $category = Category::factory()->create();
         $file = UploadedFile::fake()->image('image.jpg', 1, 1);
         Storage::fake('public/storage/images');
@@ -23,7 +26,7 @@ class ProductTest extends TestCase
             'name' => 'test product',
             'status' => 'active',
             'image' =>  $file,
-            'category' => array($category->id),
+            'category' => [$category->id],
         ])
             ->assertRedirect(route('index'));
         $productId = Product::query()->value('id');
@@ -61,6 +64,8 @@ class ProductTest extends TestCase
 
     public function test_product_update()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $category = Category::factory()->create();
         $product = Product::factory()->create();
         $file = UploadedFile::fake()->image('photo1.jpg');
@@ -71,7 +76,7 @@ class ProductTest extends TestCase
             'name' => 'updated product',
             'status' => 'inactive',
             'image' => $file,
-            'category' => array($category->id),
+            'category' => [$category->id],
         ])
             ->assertRedirect(route('index'));
 
@@ -90,6 +95,8 @@ class ProductTest extends TestCase
 
     public function test_product_delete()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $product = Product::factory()->create();
         $this->delete(route('product.destroy', $product))
             ->assertRedirect(route('index'));

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Category;
@@ -12,6 +13,8 @@ class CategoryTest extends TestCase
 
     public function test_new_category_store()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $this->post(route('category.store'), [
             'name' => 'test category',
             'status' => 'active',
@@ -44,6 +47,8 @@ class CategoryTest extends TestCase
 
     public function test_category_update()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $category = Category::factory()->create();
         $this->put(route('category.update', $category->id), [
             'name' => 'updated category',
@@ -60,6 +65,8 @@ class CategoryTest extends TestCase
 
     public function test_category_delete()
     {
+        $user = User::factory()->create();
+        $this->be($user);
         $category = Category::factory()->create();
         $this->delete(route('category.destroy', $category))
             ->assertRedirect(route('index'));

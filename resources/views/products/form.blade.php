@@ -35,7 +35,7 @@
                             "checked" : ''}} >
                     </label>
                         <label class="form-check-label" for="radio1">Active</label>
-                    </div>
+                </div>
                     <div class="form-check col-3">
                         <label>
                             <input type="radio" class="form-check-input radio2"
@@ -43,9 +43,9 @@
                                 {{((old('status') == 'inactive') ||
                                 (isset($product) && $product->status == 'inactive' && (old('status') != 'active'))) ?
                                 "checked" : ''}}>
-                    </label>
-                    <label class="form-check-label" for="radio2">Inactive</label>
-                </div>
+                        </label>
+                        <label class="form-check-label" for="radio2">Inactive</label>
+                    </div>
                 @error('status')
                     <span>{{$message}}</span>
                 @enderror
@@ -65,7 +65,6 @@
                     <span>{{$message}}</span>
                 @enderror
             </div>
-
             <div class="input-group mb-3">
                 <label for="name" class="input-group-text">Category</label>
                 <label>
@@ -81,7 +80,7 @@
                     </select>
                 </label>
                 @error('category')
-                <span>{{$message}}</span>
+                    <span>{{$message}}</span>
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

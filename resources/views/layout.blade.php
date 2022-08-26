@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="row mt-5">
+        <div class="mt-5">
             @yield('container')
         </div>
     </div>
