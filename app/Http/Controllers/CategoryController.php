@@ -9,6 +9,13 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function show(): View
+    {
+        $categories = Category::query()
+            ->simplePaginate(10, '*', 'categories');
+        return view('admin.category', ['categories' => $categories]);
+    }
+
     public function create(): View
     {
         return view('categories.form');

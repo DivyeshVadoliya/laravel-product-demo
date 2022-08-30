@@ -10,6 +10,13 @@ use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
+    public function show(): View
+    {
+        $products = Product::query()
+            ->simplePaginate(10, '*', 'products');
+        return view('admin.product', ['products' => $products]);
+    }
+
     public function create(): View
     {
         $categories = Category::query()->get();

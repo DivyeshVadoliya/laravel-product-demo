@@ -1,53 +1,30 @@
-@extends('layout')
-@section('title', 'Category')
+@extends('formLayout')
 @section('container')
-    <div class="container mb-5 mt-5">
-        <a class="btn btn-success" href="{{ route('index') }}">Back</a>
-    </div>
-    <div class="col-4">
-        <h2>Category</h2>
-        <form
-            action="{{isset($category) ?  @route('category.update', $category->id) : @route('category.store')}}"
-            method="POST">
-            @csrf
-            @isset($category)
-                @method('PUT')
-            @endisset
-            <div class="mb-3 mt-3">
-                <label for="name">Add/Edit Category</label>
-                <label>
-                    <input type="text" class="form-control" name="name"
-                           value='{{ $category->name ?? old('name')}}'>
-                </label>
-                @error('name')
-                    <span>{{$message}}</span>
-                @enderror
-            </div>
-            <div class="row mb-3">
-                <label class="col-2" for="name">Status</label>
-                <div class="form-check col-3">
-                    <label>
-                        <input type="radio" class="form-check-input radio1" name="status" value="active"
-                            {{((old('status') == 'active') ||
-                                (isset($category) && $category->status ==  'active')) ?
-                                "checked" : ''}}>
-                    </label>
-                    <label class="form-check-label" for="radio1">Active</label>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Add Category</h3>
+        </div>
+        <form>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Category name">
                 </div>
-                <div class="form-check col-3">
-                    <label>
-                        <input type="radio" class="form-check-input radio2" name="status" value="inactive"
-                            {{((old('status') == 'inactive') ||
-                                (isset($category) && $category->status == 'inactive' && (old('status') != 'active'))) ?
-                                 "checked" : ''}}>
-                    </label>
-                    <label class="form-check-label" for="radio2">Inactive</label>
+                <div class="form-group row">
+                    <div class="col-3"><label>Status</label></div>
+                    <div class="form-check col-3">
+                        <input class="form-check-input" type="radio" name="radio1">
+                        <label class="form-check-label">Active</label>
+                    </div>
+                    <div class="form-check col-3">
+                        <input class="form-check-input" type="radio" name="radio1" checked="">
+                        <label class="form-check-label">Inactive</label>
+                    </div>
                 </div>
-                @error('status')
-                    <span>{{$message}}</span>
-                @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 @endsection
