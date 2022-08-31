@@ -28,6 +28,9 @@
                                 Product Name
                             </th>
                             <th style="width: 10%" class="text-center">
+                                Product User
+                            </th>
+                            <th style="width: 10%" class="text-center">
                                 Status
                             </th>
                             <th style="width: 20%">
@@ -46,6 +49,7 @@
                             <tr>
                                 <td> {{$loop->iteration}} </td>
                                 <td> {{$product->name}} </td>
+                                <td class="text-center"> {{$product->user->name}} </td>
                                 <td class="project-state">
                                     <span class="{{($product->status == 'active') ?
                                         'badge badge-success' : 'badge badge-danger'}}">

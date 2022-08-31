@@ -15,6 +15,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->name,
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'image' => $this->faker->randomElement(['bluetooth.jpg', 'laptop.jpg', 'mobileimage.jpg']),
+            'user_id' => 2,
         ];
     }
 }

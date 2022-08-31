@@ -53,10 +53,12 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>Admin,Seller,Buyer</td>
+                            <td>{{$user->roll}}</td>
                             <td class="project-state">
-                                <span class="badge badge-success">Active</span>
-                                <span class="badge badge-danger">Inactive</span>
+                                <span class="{{($user->status == 'active') ?
+                                        'badge-success' : 'badge-danger'}}">
+                                    {{$user->status}}
+                                </span>
                             </td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-info btn-sm" href="#">
