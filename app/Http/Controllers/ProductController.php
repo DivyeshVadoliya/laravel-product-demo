@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -30,16 +31,18 @@ class ProductController extends Controller
         $imageName = $file->hashName();
         $file->move(public_path('storage/images'), $imageName);
         $data['image'] = $imageName;
-        Product::query()->create($data)->categories()->attach($data['category']);
-        return redirect()->route('index')
-            ->with('message', 'Product Added successfully!');
+        $data['user_id'] = Auth::id();
+        Product::query()->create($data)
+            ->categories()->attach($data['category']);
+        return redirect()->route('product.show')
+            ->with('product', 'Product Added successfully!');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
-        return redirect(route('index'))
-            ->with('message', 'Product Deleted successfully!');
+        return redirect(route('product.show'))
+            ->with('product', 'Product Deleted successfully!');
     }
 
     public function edit(Product $product): View
@@ -60,7 +63,7 @@ class ProductController extends Controller
         }
         $product->categories()->sync($data['category']);
         $product->update($data);
-        return redirect()->route('index')
-            ->with('message', 'Product Updated successfully!');
+        return redirect()->route('product.show')
+            ->with('product', 'Product Updated successfully!');
     }
 }

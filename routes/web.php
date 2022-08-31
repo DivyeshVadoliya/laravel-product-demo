@@ -32,8 +32,8 @@ Route::group(['middleware'=>['roll']],function() {
 //Route::get('/', [DashboardController::class, 'index'])->name('index');
 Route::group(['middleware'=>['auth']],function() {
 
-    Route::get('/product', [ProductController::class, 'create'])->name('product.create');
-    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('/product/{product}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');

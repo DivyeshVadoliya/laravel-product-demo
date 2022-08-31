@@ -1,5 +1,11 @@
 @extends('formLayout')
 @section('container')
+    <div class="container-fluid mb-2 mt-2">
+        <div class="small-box bg-success" style="height: 50px">
+            <a href="{{route('product.create')}}" class="small-box-footer" style="height: 50px">
+                <h1>Add Product  <i class="fas fa-arrow-circle-right"></i></h1></a>
+        </div>
+    </div>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -65,15 +71,15 @@
                                 <td class="project-state">
                                     <img src="{{ asset('/storage/images/'.$product->image) }}" width="50" height="40">
                                 </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="#">
-                                        <i class="fas fa-pencil-alt"></i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash"></i>
-                                        Delete
-                                    </a>
+                                <td class="project-actions text-center">
+                                    <form action="{{route('product.destroy', [$product->id])}}"
+                                          method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <a href="{{route('product.edit', [$product->id])}}"
+                                           class="btn btn-info btn-sm">Edit</a>
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -82,4 +88,10 @@
             </div>
         </div>
     </section>
+    {{$products->withQueryString()->links()}}
+    <script>
+        @if(session('product'))
+            alert("{{session('product')}}");
+        @endif
+    </script>
 @endsection
