@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function show(): View
     {
-        $categories = Category::query()
+        $categories = Category::query()->orderByDesc('id')
             ->simplePaginate(10, '*', 'categories');
         return view('admin.category', ['categories' => $categories]);
     }
@@ -24,13 +24,15 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): RedirectResponse
     {
         Category::query()->create($request->validated());
-        return redirect()->route('index')->with('message', 'Category added successfully!');
+        return redirect()->route('category.show')
+            ->with('category', 'Category added successfully!');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
-        return redirect(route('index'))->with('message', 'Category deleted successfully!');
+        return redirect()->route('category.show')
+            ->with('category', 'Category deleted successfully!');
     }
 
     public function edit(Category $category): View
@@ -41,6 +43,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
-        return redirect()->route('index')->with('message', 'Category Updated successfully!');
+        return redirect()->route('category.show')
+            ->with('category', 'Category Updated successfully!');
     }
 }

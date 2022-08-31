@@ -17,20 +17,20 @@ Route::group(['middleware'=>['roll']],function() {
 
     Route::get('/admin/register',[AdminController::class, 'createUserForm'])->name('admin.createUserForm');
     Route::post('/admin/register', [AdminController::class, 'createUser'])->name('admin.createUser');
-
     Route::get('/admin/user', [AdminController::class, 'showUser'])->name('admin.showUser');
+
     Route::get('/admin/category', [CategoryController::class, 'show'])->name('category.show');
+    Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/admin/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/admin/category/{category}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/admin/category/{category}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/admin/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
     Route::get('/admin/product', [ProductController::class, 'show'])->name('product.show');
 });
 
 //Route::get('/', [DashboardController::class, 'index'])->name('index');
 Route::group(['middleware'=>['auth']],function() {
-
-    Route::get('/category', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('/category/{category}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     Route::get('/product', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');

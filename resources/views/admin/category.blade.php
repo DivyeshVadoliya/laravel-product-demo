@@ -53,14 +53,14 @@
                                 </span>
                             </td>
                             <td class="project-actions text-center" >
-                                <a class="btn btn-info btn-sm" href="#">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                </a>
+                                <form action="{{route('category.destroy', [$category->id])}}"
+                                      method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <a href="{{route('category.edit', [$category->id])}}"
+                                       class="btn btn-info btn-sm">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -69,4 +69,10 @@
             </div>
         </div>
     </section>
+    {{$categories->withQueryString()->links()}}
+    <script>
+        @if(session('category'))
+            alert("{{session('category')}}");
+        @endif
+    </script>
 @endsection
