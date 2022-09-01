@@ -13,12 +13,12 @@ class CategoryController extends Controller
     {
         $categories = Category::query()->orderByDesc('id')
             ->simplePaginate(10, '*', 'categories');
-        return view('admin.category', ['categories' => $categories]);
+        return view('admin.category.list', ['categories' => $categories]);
     }
 
     public function create(): View
     {
-        return view('categories.form');
+        return view('admin.category.form');
     }
 
     public function store(CategoryRequest $request): RedirectResponse

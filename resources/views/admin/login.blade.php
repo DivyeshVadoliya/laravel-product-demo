@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.script')
 @section('body')
 
 <body class="hold-transition login-page">

@@ -1,4 +1,4 @@
-@extends('formLayout')
+@extends('layouts.adminPenal')
 @section('container')
     <div class="container-fluid mb-2 mt-2">
         <div class="small-box bg-success" style="height: 50px">

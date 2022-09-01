@@ -1,8 +1,8 @@
-@extends('formLayout')
+@extends('layouts.adminPenal')
 @section('container')
     <div class="container-fluid mb-2 mt-2">
         <div class="small-box bg-success" style="height: 50px">
-            <a href="{{route('admin.register')}}" class="small-box-footer" style="height: 50px">
+            <a href="{{route('admin.user.create')}}" class="small-box-footer" style="height: 50px">
                 <h1>Add User <i class="fas fa-arrow-circle-right"></i></h1></a>
         </div>
     </div>

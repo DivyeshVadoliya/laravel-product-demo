@@ -14,17 +14,18 @@ Route::group(['middleware'=>['roll']],function() {
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    Route::get('/admin/user/create', function () {
+        return view('admin.user.create');
+    })->name('admin.user.create');
+});
+
+//Route::get('/', [DashboardController::class, 'index'])->name('index');
+Route::group(['middleware'=>['auth']],function() {
 
     Route::get('/admin/register',[AdminController::class, 'createUserForm'])->name('admin.createUserForm');
     Route::post('/admin/register', [AdminController::class, 'createUser'])->name('admin.createUser');
     Route::get('/admin/user', [AdminController::class, 'showUser'])->name('admin.showUser');
 
-    Route::get('/admin/category', [CategoryController::class, 'show'])->name('category.show');
-    Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/admin/category/store', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('/admin/category/{category}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('/admin/category/{category}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/admin/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     Route::get('/admin/product', [ProductController::class, 'show'])->name('product.show');
 });
@@ -41,4 +42,5 @@ Route::group(['middleware'=>['auth']],function() {
     Route::get('/password/change', [ChangePassword::class, 'edit'])->name('change.password.edit');
     Route::put('/password/change', [ChangePassword::class, 'update'])->name('change.password.update');
 });
+require 'category.php';
 require __DIR__.'/auth.php';

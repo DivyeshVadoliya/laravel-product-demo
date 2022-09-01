@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         $products = Product::query()
             ->simplePaginate(10, '*', 'products');
-        return view('admin.product', ['products' => $products]);
+        return view('admin.product.list', ['products' => $products]);
     }
 
     public function create(): View

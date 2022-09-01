@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         $users = User::query()
             ->simplePaginate(10, '*', 'users');
-        return view('admin.user', ['users' => $users]);
+        return view('admin.user.list', ['users' => $users]);
     }
 
     public function login(): View

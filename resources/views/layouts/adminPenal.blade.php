@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.script')
 @section('body')
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -70,9 +70,9 @@
                         <img src="{{asset('assets/image/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     @if(Auth::check())
-                    <div class="info">
-                        <a href="#" class="d-block">{{Auth::user()->name}}</a>
-                    </div>
+                        <div class="info">
+                            <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                        </div>
                     @endif
                 </div>
                 <!-- SidebarSearch Form -->
