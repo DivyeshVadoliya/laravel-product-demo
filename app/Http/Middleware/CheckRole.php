@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,11 +16,13 @@ class IsAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if(isset($request) && (($request->user()->roll) == 'admin')){
-            return $next($request);
+        if(Auth::check()){
+            if(($request->user()->roll) == $role) {
+                return $next($request);
+            }
         }
-        return redirect(route('admin.login'))->with('status', 'You are not authorized!...');
+        return redirect(route('admin.login'))->with('status', 'You are Not Authorized!..');
     }
 }

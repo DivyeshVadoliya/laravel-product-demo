@@ -61,14 +61,20 @@
                                 </span>
                             </td>
                             <td class="project-actions text-right">
-                                <a class="btn btn-info btn-sm" href="#">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash"></i>
-                                    Delete
-                                </a>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="{{route('user.edit', [$user->id])}}"
+                                           class="btn btn-info btn-sm">Edit</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <form action="{{route('user.destroy', [$user->id])}}"
+                                              method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -77,4 +83,9 @@
             </div>
         </div>
     </section>
+    <script>
+        @if(session('massage'))
+            alert("{{session('massage')}}");
+        @endif
+    </script>
 @endsection
