@@ -10,7 +10,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'checkLogin'])->name('admin.checkLogin');
 
-Route::group(['middleware'=>['roll']],function() {
+Route::group(['middleware' => ['roll']], function () {
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
@@ -20,9 +20,9 @@ Route::group(['middleware'=>['roll']],function() {
 });
 
 //Route::get('/', [DashboardController::class, 'index'])->name('index');
-Route::group(['middleware'=>['auth']],function() {
+Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/admin/register',[AdminController::class, 'createUserForm'])->name('admin.createUserForm');
+    Route::get('/admin/register', [AdminController::class, 'createUserForm'])->name('admin.createUserForm');
     Route::post('/admin/register', [AdminController::class, 'createUser'])->name('admin.createUser');
     Route::get('/admin/user', [AdminController::class, 'showUser'])->name('admin.showUser');
 
@@ -31,7 +31,7 @@ Route::group(['middleware'=>['auth']],function() {
 });
 
 //Route::get('/', [DashboardController::class, 'index'])->name('index');
-Route::group(['middleware'=>['auth']],function() {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
@@ -43,4 +43,4 @@ Route::group(['middleware'=>['auth']],function() {
     Route::put('/password/change', [ChangePassword::class, 'update'])->name('change.password.update');
 });
 require 'category.php';
-require __DIR__.'/auth.php';
+require 'auth.php';
