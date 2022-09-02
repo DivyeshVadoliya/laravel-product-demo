@@ -72,14 +72,20 @@
                                     <img src="{{ asset('/storage/images/'.$product->image) }}" width="50" height="40">
                                 </td>
                                 <td class="project-actions text-center">
-                                    <form action="{{route('product.destroy', [$product->id])}}"
-                                          method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        <a href="{{route('product.edit', [$product->id])}}"
-                                           class="btn btn-info btn-sm">Edit</a>
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="{{route('product.edit', [$product->id])}}"
+                                               class="btn btn-info btn-sm">Edit</a>
+                                        </div>
+                                        <div class="col-4">
+                                            <form action="{{route('product.destroy', [$product->id])}}"
+                                                  method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -90,8 +96,8 @@
     </section>
     {{$products->withQueryString()->links()}}
     <script>
-        @if(session('product'))
-            alert("{{session('product')}}");
+        @if(session('massage'))
+            alert("{{session('massage')}}");
         @endif
     </script>
 @endsection

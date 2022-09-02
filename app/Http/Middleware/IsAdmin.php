@@ -3,9 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class CheckRoll
+class IsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,9 @@ class CheckRoll
      */
     public function handle(Request $request, Closure $next)
     {
-        //dd($request->user()->roll);
-        if(isset($request->user()->roll) == 'admin'){
+        if(isset($request) && (($request->user()->roll) == 'admin')){
             return $next($request);
         }
-        return redirect(route('admin.login'));
+        return redirect(route('admin.login'))->with('status', 'You are not authorized!...');
     }
 }

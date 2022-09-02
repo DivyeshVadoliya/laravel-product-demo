@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.showUser')}}" class="nav-link">
+                            <a href="{{route('user.show')}}" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
                                     User

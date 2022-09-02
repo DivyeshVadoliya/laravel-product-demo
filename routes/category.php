@@ -3,7 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin/category', 'middleware' => ['auth'] ], function () {
+Route::group(['prefix' => 'admin/category', 'middleware' => ['is.admin'] ], function () {
     Route::get('/', [CategoryController::class, 'show'])->name('category.show');
 
     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -16,4 +16,3 @@ Route::group(['prefix' => 'admin/category', 'middleware' => ['auth'] ], function
 
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 });
-

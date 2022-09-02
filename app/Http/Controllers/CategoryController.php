@@ -25,25 +25,25 @@ class CategoryController extends Controller
     {
         Category::query()->create($request->validated());
         return redirect()->route('category.show')
-            ->with('category', 'Category added successfully!');
+            ->with('massage', 'Category added successfully!');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
         return redirect()->route('category.show')
-            ->with('category', 'Category deleted successfully!');
+            ->with('massage', 'Category deleted successfully!');
     }
 
     public function edit(Category $category): View
     {
-        return view('categories.form', ['category' => $category]);
+        return view('admin.category.form', ['category' => $category]);
     }
 
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
         return redirect()->route('category.show')
-            ->with('category', 'Category Updated successfully!');
+            ->with('massage', 'Category Updated successfully!');
     }
 }

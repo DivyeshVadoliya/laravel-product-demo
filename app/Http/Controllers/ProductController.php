@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::query()->get();
-        return view('products.form', ['categories' => $categories]);
+        return view('admin.product.form', ['categories' => $categories]);
     }
 
     public function store(ProductRequest $request): RedirectResponse
@@ -35,20 +35,20 @@ class ProductController extends Controller
         Product::query()->create($data)
             ->categories()->attach($data['category']);
         return redirect()->route('product.show')
-            ->with('product', 'Product Added successfully!');
+            ->with('massage', 'Product Added successfully!');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
         return redirect(route('product.show'))
-            ->with('product', 'Product Deleted successfully!');
+            ->with('massage', 'Product Deleted successfully!');
     }
 
     public function edit(Product $product): View
     {
         $categories = Category::query()->get();
-        return view('products.form',
+        return view('admin.product.form',
             ['product' => $product, 'categories' => $categories]);
     }
 
@@ -64,6 +64,6 @@ class ProductController extends Controller
         $product->categories()->sync($data['category']);
         $product->update($data);
         return redirect()->route('product.show')
-            ->with('product', 'Product Updated successfully!');
+            ->with('massage', 'Product Updated successfully!');
     }
 }

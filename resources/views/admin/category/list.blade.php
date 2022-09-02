@@ -52,15 +52,21 @@
                                     {{$category->status}}
                                 </span>
                             </td>
-                            <td class="project-actions text-center" >
-                                <form action="{{route('category.destroy', [$category->id])}}"
-                                      method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <a href="{{route('category.edit', [$category->id])}}"
-                                       class="btn btn-info btn-sm">Edit</a>
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                            <td class="project-actions text-center ">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="{{route('category.edit', [$category->id])}}"
+                                           class="btn btn-info btn-sm">Edit</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <form action="{{route('category.destroy', [$category->id])}}"
+                                              method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -71,8 +77,8 @@
     </section>
     {{$categories->withQueryString()->links()}}
     <script>
-        @if(session('category'))
-            alert("{{session('category')}}");
+        @if(session('massage'))
+            alert("{{session('massage')}}");
         @endif
     </script>
 @endsection

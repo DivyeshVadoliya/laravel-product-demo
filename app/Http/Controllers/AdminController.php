@@ -11,12 +11,6 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    public function showUser(): View
-    {
-        $users = User::query()
-            ->simplePaginate(10, '*', 'users');
-        return view('admin.user.list', ['users' => $users]);
-    }
 
     public function login(): View
     {
@@ -28,20 +22,5 @@ class AdminController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->route('admin.dashboard');
-    }
-
-    public function createUserForm(): View
-    {
-        return view('admin.register');
-    }
-
-    public function createUser(CreateUserRequest $request): RedirectResponse
-    {
-        $data = $request->validated();
-        $data['password'] = Hash::make($request->password);
-        User::query()->create($data);
-
-        return redirect()->route('admin.dashboard')
-            ->with('success', 'Create user Successfully !..');
     }
 }
