@@ -16,9 +16,13 @@
                         <x-dropdown-link :href="route('logout')"
                                          onclick="event.preventDefault();
                                          this.closest('form').submit();">
-                            <button class="btn btn-light">Logout</button>
+                            <button class="btn btn-light btn-sm">Logout</button>
                         </x-dropdown-link>
                     </form>
+                </li>
+                <li class="nav-link">
+                    <a href="{{route('password.change.edit')}}"
+                       class="btn btn-light btn-sm">Change Password</a>
                 </li>
             </ul>
             <!-- Right navbar links -->

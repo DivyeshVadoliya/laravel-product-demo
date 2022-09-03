@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -41,13 +40,10 @@ class UserController extends Controller
     public function update(CreateUserRequest $request, User $user): RedirectResponse
     {
         $data = $request->validated();
-        if($data['password'] == null)
-        {
-            $data['password'] = $user->password;
-        }
-        else {
+        ($data['password'] == null) ?
+            $data['password'] = $user->password :
             $data['password'] = Hash::make($request->password);
-        }
+
         $user->update($data);
         return redirect()->route('user.show')
             ->with('massage', 'User Updated successfully!');

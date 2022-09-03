@@ -7,11 +7,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
-class ChangePassword extends Controller
+class PasswordChangeController extends Controller
 {
     public function edit(): View
     {
-        return view('password.changePassword');
+        return view('admin.password.change');
     }
 
     public function update(PasswordRequest $request): RedirectResponse
@@ -22,9 +22,9 @@ class ChangePassword extends Controller
             $currentUser->update([
                'password' => bcrypt($data['newPassword']),
             ]);
-            return redirect(route('index'))->with('success', 'Change Password successfully!');
+            return redirect(route('admin.dashboard'))->with('success', 'Change Password successfully!');
         }else{
-            return redirect(route('change.password.edit'))->with('error', 'Old password wrong insert!..');
+            return redirect(route('password.change.edit'))->with('error', 'Old password wrong insert!..');
         }
     }
 }
