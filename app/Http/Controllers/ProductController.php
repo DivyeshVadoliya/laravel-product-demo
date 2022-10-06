@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
         $products = Product::query()
             ->simplePaginate(10, '*', 'products');
@@ -34,14 +34,14 @@ class ProductController extends Controller
         $data['user_id'] = Auth::id();
         Product::query()->create($data)
             ->categories()->attach($data['category']);
-        return redirect()->route('product.show')
+        return redirect()->route('product.index')
             ->with('massage', 'Product Added successfully!');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
-        return redirect(route('product.show'))
+        return redirect(route('product.index'))
             ->with('massage', 'Product Deleted successfully!');
     }
 
@@ -63,7 +63,7 @@ class ProductController extends Controller
         }
         $product->categories()->sync($data['category']);
         $product->update($data);
-        return redirect()->route('product.show')
+        return redirect()->route('product.index')
             ->with('massage', 'Product Updated successfully!');
     }
 }

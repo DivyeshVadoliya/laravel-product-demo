@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('product.show')}}" class="nav-link">
+                            <a href="{{route('product.index')}}" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     Product
@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('category.show')}}" class="nav-link">
+                            <a href="{{route('category.index')}}" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     Category
@@ -119,7 +119,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('user.show')}}" class="nav-link">
+                            <a href="{{route('user.index')}}" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
                                     User

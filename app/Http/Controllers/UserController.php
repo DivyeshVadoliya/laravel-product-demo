@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
         $users = User::query()
             ->simplePaginate(10, '*', 'users');
@@ -28,7 +28,7 @@ class UserController extends Controller
         $data['password'] = Hash::make($request->password);
         User::query()->create($data);
 
-        return redirect()->route('user.show')
+        return redirect()->route('user.index')
             ->with('success', 'Create user Successfully !..');
     }
 
@@ -45,14 +45,14 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->password);
 
         $user->update($data);
-        return redirect()->route('user.show')
+        return redirect()->route('user.index')
             ->with('massage', 'User Updated successfully!');
     }
 
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
-        return redirect()->route('user.show')
+        return redirect()->route('user.index')
             ->with('massage', 'User deleted successfully!');
     }
 }

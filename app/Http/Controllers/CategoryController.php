@@ -9,7 +9,7 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function show(): View
+    public function index(): View
     {
         $categories = Category::query()->orderByDesc('id')
             ->simplePaginate(10, '*', 'categories');
@@ -24,14 +24,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): RedirectResponse
     {
         Category::query()->create($request->validated());
-        return redirect()->route('category.show')
+        return redirect()->route('category.index')
             ->with('massage', 'Category added successfully!');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
-        return redirect()->route('category.show')
+        return redirect()->route('category.index')
             ->with('massage', 'Category deleted successfully!');
     }
 
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
-        return redirect()->route('category.show')
+        return redirect()->route('category.index')
             ->with('massage', 'Category Updated successfully!');
     }
 }
