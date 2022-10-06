@@ -2,21 +2,23 @@
 @section('body')
 
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box w-50 h-75">
     <div class="card card-primary">
         <div class="card-header">
             <x-auth-session-status class="mb-4" :status="session('status')" />
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
         </div>
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <a href="#">
+                <img src="{{asset('assets/image/avatar.png')}}" width="50px" height="50px">
+            </a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form action="{{route('admin.check')}}" method="post">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 pb-4">
                         <input type="email" class="form-control" name="email" value="{{old('email')}}" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -24,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 pb-4">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
